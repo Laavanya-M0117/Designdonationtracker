@@ -42,4 +42,8 @@ coverage
 coverage.json
 
 # Deployment info
+deployments/
 deployments.json
+
+# Claude settings
+.claude/
