@@ -57,15 +57,17 @@ const getContractAddress = (): string => {
 export const config: AppConfig = {
   contractAddress: getContractAddress(),
   networkConfig: {
-    chainId: '0x13882', // Polygon Amoy Testnet
-    chainName: 'Polygon Amoy Testnet',
+    chainId: getEnvironmentVariable(['VITE_CHAIN_ID', 'NEXT_PUBLIC_CHAIN_ID']) || '0x7A69',
+    chainName: getEnvironmentVariable(['VITE_CHAIN_ID', 'NEXT_PUBLIC_CHAIN_ID']) === '0x7A69'
+      ? 'Hardhat Local Network'
+      : 'Polygon Amoy Testnet',
     nativeCurrency: {
       name: 'MATIC',
       symbol: 'MATIC',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc-amoy.polygon.technology/'],
-    blockExplorerUrls: ['https://amoy.polygonscan.com/'],
+    rpcUrls: [getEnvironmentVariable(['VITE_RPC_URL', 'NEXT_PUBLIC_RPC_URL']) || 'http://127.0.0.1:8545'],
+    blockExplorerUrls: [getEnvironmentVariable(['VITE_BLOCK_EXPLORER', 'NEXT_PUBLIC_BLOCK_EXPLORER']) || 'http://127.0.0.1:8545'],
   },
 };
 
